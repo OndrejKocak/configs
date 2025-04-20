@@ -114,4 +114,7 @@ fi
 alias python=python3
 
 export PATH="$PATH:/usr/local/go/bin"
-export PS1="\[\e[38;5;46m\]\u\[\e[m\]@\[\e[38;5;206m\]\h\[\e[m\]:\[\e[38;5;51m\]\w\[\e[m\]\$ "
+parse_git_branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [ \1]/'
+}
+export PS1="\[\e[38;5;46m\]\u\[\e[m\]@\[\e[38;5;206m\]\h\[\e[m\]:\[\e[38;5;51m\]\w\[\e[38;5;226m\]\$(parse_git_branch)\[\e[m\]\$ "
